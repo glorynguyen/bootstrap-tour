@@ -190,7 +190,7 @@
       return this._callOnPromiseDone(promise, this.showStep, i);
     };
 
-    Tour.prototype.end = function() {
+    Tour.prototype.end = function(event) {
       var endHelper, promise;
       endHelper = (function(_this) {
         return function(e) {
@@ -201,6 +201,7 @@
           _this._inited = false;
           _this._force = false;
           _this._clearTimer();
+          _this.customEvent = event;
           if (_this._options.onEnd != null) {
             return _this._options.onEnd(_this);
           }
@@ -750,7 +751,7 @@
       })(this)).on("click.tour-" + this._options.name, ".popover.tour-" + this._options.name + " *[data-role='end']", (function(_this) {
         return function(e) {
           e.preventDefault();
-          return _this.end();
+          return _this.end(e);
         };
       })(this)).on("click.tour-" + this._options.name, ".popover.tour-" + this._options.name + " *[data-role='pause-resume']", function(e) {
         var $this;
